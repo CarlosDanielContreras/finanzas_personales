@@ -30,7 +30,7 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <p class="text-muted mb-1 small">Balance Total</p>
-                            <h3 class="fw-bold mb-0">{{ estadisticas.balance_total|formato_moneda }}</h3>
+                            <h3 class="fw-bold mb-0">{{ current_user.get_balance_total()|formato_moneda }}</h3>
                         </div>
                         <div class="bg-primary bg-opacity-10 p-3 rounded">
                             <i class="fas fa-wallet fa-2x text-primary"></i>

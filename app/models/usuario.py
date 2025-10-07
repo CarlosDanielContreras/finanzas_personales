@@ -153,7 +153,7 @@ class Usuario(UserMixin, db.Model):
             dict: Diccionario con estadísticas principales
         """
         return {
-            'balance_total': self.get_balance_total(),
+            'balance_total': self.get_balance_total(),  # ✅ AGREGAR ESTA LÍNEA
             'ingresos_mes': self.get_ingresos_mes_actual(),
             'egresos_mes': self.get_egresos_mes_actual(),
             'balance_mes': self.get_balance_mes_actual(),
