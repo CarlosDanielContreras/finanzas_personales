@@ -46,14 +46,17 @@ def create_app(config_name='development'):
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
     
-    # Registrar Blueprints (rutas)
-    from app.routes import auth, main, transacciones, reportes, admin
+    # Registrar Blueprints (rutas) - SOLO los que existen
+    from app.routes import auth, main
     
     app.register_blueprint(auth.bp)
     app.register_blueprint(main.bp)
-    app.register_blueprint(transacciones.bp)
-    app.register_blueprint(reportes.bp)
-    app.register_blueprint(admin.bp)
+    
+    # TODO: Descomentar cuando crees estos blueprints
+    # from app.routes import transacciones, reportes, admin
+    # app.register_blueprint(transacciones.bp)
+    # app.register_blueprint(reportes.bp)
+    # app.register_blueprint(admin.bp)
     
     # Registrar filtros personalizados de Jinja2
     from app.utils import filters

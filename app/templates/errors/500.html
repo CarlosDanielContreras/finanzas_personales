@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Error del servidor - 500{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="col-md-6 text-center">
+            <i class="fas fa-server fa-5x text-danger mb-4"></i>
+            <h1 class="display-4 fw-bold">500</h1>
+            <h3 class="mb-3">Error del servidor</h3>
+            <p class="text-muted mb-4">
+                Algo salió mal en nuestro servidor. Estamos trabajando para solucionarlo.
+            </p>
+            <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+                <i class="fas fa-home me-2"></i>Volver al inicio
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
