@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}Iniciar Sesión - Finanzas Personales{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="col-md-5 col-lg-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <!-- Logo y título -->
+                    <div class="text-center mb-4">
+                        <div class="mb-3">
+                            <i class="fas fa-wallet fa-3x text-primary"></i>
+                        </div>
+                        <h3 class="fw-bold">Finanzas Personales</h3>
+                        <p class="text-muted">Inicia sesión en tu cuenta</p>
+                    </div>
+                    
+                    <!-- Formulario de login -->
+                    <form method="POST" action="{{ url_for('auth.login') }}">
+                        {{ form.hidden_tag() }}
+                        
+                        <!-- Email -->
+                        <div class="mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control form-control-lg") }}
+                            {% if form.email.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.email.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Password -->
+                        <div class="mb-3">
+                            {{ form.password.label(class="form-label") }}
+                            {{ form.password(class="form-control form-control-lg") }}
+                            {% if form.password.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.password.errors %}
+                                        <div>{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Recordarme -->
+                        <div class="mb-3 form-check">
+                            {{ form.recordar(class="form-check-input") }}
+                            {{ form.recordar.label(class="form-check-label") }}
+                        </div>
+                        
+                        <!-- Botón Submit -->
+                        <div class="d-grid mb-3">
+                            {{ form.submit(class="btn btn-primary btn-lg") }}
+                        </div>
+                        
+                        <!-- Enlaces -->
+                        <div class="text-center">
+                            <a href="{{ url_for('auth.recuperar_password') }}" class="text-decoration-none small">
+                                ¿Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                    </form>
+                    
+                    <!-- Separador -->
+                    <hr class="my-4">
+                    
+                    <!-- Link a registro -->
+                    <div class="text-center">
+                        <p class="mb-0 text-muted">
+                            ¿No tienes una cuenta?
+                            <a href="{{ url_for('auth.registro') }}" class="text-primary text-decoration-none fw-bold">
+                                Regístrate aquí
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Información adicional -->
+            <div class="text-center mt-3">
+                <p class="text-muted small">
+                    <i class="fas fa-lock me-1"></i>
+                    Tu información está protegida con encriptación de nivel bancario
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

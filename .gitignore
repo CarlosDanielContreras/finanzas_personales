@@ -1,0 +1,90 @@
+# Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Entorno virtual
+venv/
+env/
+ENV/
+.venv
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de configuración de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Archivos subidos por usuarios
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+*.log
+logs/
+
+# Archivos temporales
+*.tmp
+*.bak
+*.cache
+
+# Migraciones (opcional, descomentar si no quieres versionar migraciones)
+# migrations/versions/*.py
+
+# Archivos de sistema
+Thumbs.db
+.DS_Store
+
+# Reportes generados
+reportes_generados/
+
+# Archivos de prueba
+test_uploads/
+test_reports/
+
+# Configuración específica de producción
+config_production.py
+
+# Certificados y claves
+*.pem
+*.key
+*.crt
+
+# Node modules (si usas npm para frontend)
+node_modules/
+
+# Archivos de cobertura
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
