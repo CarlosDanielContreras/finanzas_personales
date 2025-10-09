@@ -1,5 +1,5 @@
 """
-Inicialización de la aplicación Flask
+Inicialización de la aplicación Flask - CORREGIDO
 app/__init__.py
 """
 
@@ -15,23 +15,12 @@ bcrypt = Bcrypt()
 login_manager = LoginManager()
 
 def create_app(config_name='development'):
-    """
-    Factory pattern para crear la aplicación Flask
+    """Factory pattern para crear la aplicación Flask"""
     
-    Args:
-        config_name: Nombre de la configuración a usar ('development', 'production', 'testing')
-    
-    Returns:
-        app: Instancia de la aplicación Flask configurada
-    """
-    
-    # Crear instancia de Flask
     app = Flask(__name__)
-    
-    # Cargar configuración
     app.config.from_object(config[config_name])
     
-    # Inicializar extensiones con la app
+    # Inicializar extensiones
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
@@ -41,24 +30,19 @@ def create_app(config_name='development'):
     login_manager.login_message = 'Por favor inicia sesión para acceder a esta página.'
     login_manager.login_message_category = 'info'
     
-    # Crear carpeta de uploads si no existe
+    # Crear carpeta de uploads
     import os
     if not os.path.exists(app.config['UPLOAD_FOLDER']):
         os.makedirs(app.config['UPLOAD_FOLDER'])
     
-    # Registrar Blueprints (rutas) - SOLO los que existen
-    from app.routes import auth, main
+    # ✅ REGISTRAR BLUEPRINTS EXISTENTES
+    from app.routes import auth, main, api
     
     app.register_blueprint(auth.bp)
     app.register_blueprint(main.bp)
+    app.register_blueprint(api.bp)  # ✅ AGREGADO
     
-    # TODO: Descomentar cuando crees estos blueprints
-    # from app.routes import transacciones, reportes, admin
-    # app.register_blueprint(transacciones.bp)
-    # app.register_blueprint(reportes.bp)
-    # app.register_blueprint(admin.bp)
-    
-    # Registrar filtros personalizados de Jinja2
+    # Registrar filtros personalizados
     from app.utils import filters
     filters.register_filters(app)
     
@@ -69,6 +53,7 @@ def create_app(config_name='development'):
     
     @app.errorhandler(500)
     def internal_server_error(e):
+        db.session.rollback()  # ✅ AGREGADO
         return render_template('errors/500.html'), 500
     
     @app.errorhandler(403)
@@ -85,7 +70,6 @@ def create_app(config_name='development'):
         }
     
     return app
-
 
 # Cargar modelo de usuario para Flask-Login
 @login_manager.user_loader
